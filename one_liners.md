@@ -313,5 +313,6 @@
 
     ```bash
      ps T o ppid= | awk '{if($1 == 1) print "cokolwiek"}' | wc -l
+     ps T --ppid 1 --no-headers | wc -l
     ```
 
