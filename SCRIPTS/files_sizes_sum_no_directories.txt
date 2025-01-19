@@ -1,0 +1,76 @@
+﻿#!/bin/bash
+
+
+if [ $# -eq 0 ]; then
+
+	echo "Wprowadź ścieżkę do katalogu:"
+
+	read PATH
+
+	if [[ ! -d "$PATH" ]]; then
+
+		echo "To nie katalog!"
+
+		exit 1
+
+	else
+
+		SUM=0
+
+		for FILE in "$PATH"/*; do
+
+			if [[ ! -d "$FILE" ]]; then
+
+			FILESIZE=$(stat -c %s "$FILE")
+
+			SUM=`expr $SUM + $FILESIZE`
+
+			fi
+
+		done
+
+		echo "Suma rozmiarów plików w $PATH to $SUM"
+
+		exit 0
+
+	fi
+
+	
+elif [ $# -gt 1 ]; then
+
+	echo "Za dużo argumentów!"
+
+	exit 2
+
+
+else
+
+	if [ -d "$1" ]; then
+
+		SUM=0
+
+		for FILE in "$1"/*; do
+
+			if [[ ! -d "$FILE" ]]; then
+
+				FILESIZE=$(stat -c %s "$FILE")
+				SUM=`expr $SUM + $FILESIZE`
+
+			fi
+
+		done
+
+		echo "Suma rozmiarów plików w $1 to $SUM"
+
+		exit 0
+
+	else
+
+		echo "To nie katalog!"
+
+		exit 1
+
+	fi
+
+
+fi

@@ -1,0 +1,51 @@
+﻿#!/bin/bash
+
+
+if [ $# -eq 0 ]; then
+
+	SUM=0
+
+	for FILE in "$PWD"/*; do
+
+		if [[ -f "$FILE" ]]; then
+
+			FILESIZE=$(stat -c %s "$FILE")
+
+			SUM=`expr $SUM + $FILESIZE`
+
+		fi
+
+	done
+
+	echo "Suma rozmiarów plików regularnych w katalogu bieżącym to $SUM"
+
+	exit 0
+
+
+elif [ $# -gt 1 ]; then
+
+	echo "Podano za dużo argumentów!"
+
+	exit 1
+
+
+else
+	
+SUM=0
+
+	for FILE in "$1"/*; do
+
+		if [[ -f FILE ]]; then
+
+			FILESIZE=$(stat -c %s "$FILE")
+
+			SUM=`expr $SUM + $FILESIZE`
+
+		fi
+
+	done
+
+	echo "Suma rozmiarów plików regularnych w $1 to $SUM"
+
+	exit 0
+fi

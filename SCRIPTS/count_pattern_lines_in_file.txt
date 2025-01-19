@@ -1,0 +1,13 @@
+﻿#!/bin/bash
+
+ARGS=("$@")
+
+
+
+for ((i=1; i<$#; i++)); do
+
+	COUNT=`grep -c "${ARGS[$i]}" "$1"`
+
+	echo "W pliku $1 wyrażenie "${ARGS[$i]}" występuje $COUNT razy"
+
+done

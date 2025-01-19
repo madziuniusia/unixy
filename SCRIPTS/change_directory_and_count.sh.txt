@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CURRENT=$PWD
+
+if [ $# != 1 ]; then
+	echo "Zla liczba argumentow"
+	exit 1
+fi
+
+cd $1
+NUMBER=`ls -l $PWD | wc -l`
+echo "Plik w w tym katalogu jest $NUMBER"
+cd $CURRENT

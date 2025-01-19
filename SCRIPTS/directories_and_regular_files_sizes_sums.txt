@@ -1,0 +1,54 @@
+﻿#!/bin/bash
+
+if [ $# -eq 0 ]; then
+
+	echo "Wprowadź katalogi:"
+
+	read -a "PATHS"
+	for ((i=0; i<"${#PATHS[@]}"; i++)); do
+
+		SUM=0
+
+		for FILE in "${PATHS[$i]}"/*; do
+
+			if [[ -f "$FILE" ]]; then
+
+				FILESIZE=$(stat -c %s "$FILE")
+
+				SUM=`expr $SUM + $FILESIZE`
+
+			fi
+
+		done
+
+		echo "Suma rozmiarów plików w katalogu ${PATHS[$i]} to $SUM"
+
+	done
+
+
+
+else
+
+	ARGS=("$@")
+
+	for ((i=0; i<$#; i++)); do
+
+		SUM=0
+
+		for FILE in "${ARGS[$i]}"/*; do
+
+		if [[ -f "$FILE" ]]; then
+
+				FILESIZE=$(stat -c %s "$FILE")
+
+				SUM=`expr $SUM + $FILESIZE`
+
+			fi
+
+		done
+
+		echo "Suma rozmiarów plików w katalogu ${ARGS[$i]} to $SUM"
+
+	done
+
+fi
